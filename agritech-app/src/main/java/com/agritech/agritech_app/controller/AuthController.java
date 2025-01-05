@@ -53,7 +53,7 @@ public class AuthController {
             response.put("message", "Signup successful");
             return ResponseEntity.ok(response);
         } else {
-            return ResponseEntity.status(401).body(Map.of("message", "Signup failed"));
+            return ResponseEntity.status(401).body(Map.of("message", "Signup failed!!"));
         }
     }
 }
