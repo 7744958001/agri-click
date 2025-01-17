@@ -1,9 +1,10 @@
 package com.agritech.agritech_app.repositery;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
-import com.agritech.agritech_app.entity.User;
 
-@Repository
+import com.agritech.agritech_app.entity.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.Optional;
+
 public interface UserRepository extends JpaRepository<User, Long> {
-	
+    Optional<User> findByUsername(String username);
 }
