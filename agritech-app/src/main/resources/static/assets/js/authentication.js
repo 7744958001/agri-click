@@ -34,7 +34,7 @@ $(document).ready(function () {
           };
 
           $.ajax({
-            url: "/api/login", // Replace with your Spring Boot API endpoint
+            url: "/api/authentication/register",
             type: "POST",
             contentType: "application/json",
             data: JSON.stringify(requestData),
@@ -50,5 +50,49 @@ $(document).ready(function () {
       });
       
       //user login
-      
+ const BASE_URL = "http://localhost:8081/auth";
+ function validateForm() {
+        let isValid = true;
+        const email = $('#email').val().trim();
+        const password = $('#password').val().trim();
+
+        if (email === '' || !/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+$/.test(email)) {
+          $('#emailError').removeClass('d-none');
+          isValid = false;
+        } else {
+          $('#emailError').addClass('d-none');
+        }
+
+        if (password === '' || password.length < 6) {
+          $('#passwordError').removeClass('d-none');
+          isValid = false;
+        } else {
+          $('#passwordError').addClass('d-none');
+        }
+
+        return isValid;
+      }
+
+      $('#loginButton').on('click', function () {
+        if (validateForm()) {
+			const username = $('#email').val().trim();
+        	const password = $('#password').val().trim();
+          $.ajax({
+            url: "/auth/login",
+            type: 'POST',
+            contentType: 'application/json',
+          	data: JSON.stringify({ username, password }),
+            success: function (token) {
+				alert(token);
+                console.log("JWT Token:", token);
+                localStorage.setItem("jwtToken", token);
+                alert("Login successful! Token stored.");
+            },
+            error: function (error) {
+              alert('Login failed. Please try again.');
+            }
+          });
+        }
+      });
+        
     });

@@ -15,13 +15,24 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, unique = true, name = "user_name")
     private String username;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "user_password")
     private String password;
+    
+    @Column(nullable = false, name = "user_role")
+    private int userRole;
 
-    // Getters and Setters
+	public int getUserRole() {
+		return userRole;
+	}
+
+	public void setUserRole(int userRole) {
+		this.userRole = userRole;
+	}
+
+	// Getters and Setters
     public Long getId() {
         return id;
     }

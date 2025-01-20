@@ -22,7 +22,7 @@ public class UserAuthentication {
     public UserAuthentication(UserService userService) {
         this.userService = userService;
     }
-
+    
     @PostMapping("/register")
     public ResponseEntity<String> registerUser(@Validated @RequestBody UserRegistrationRequest request) {
         // Validate email format
