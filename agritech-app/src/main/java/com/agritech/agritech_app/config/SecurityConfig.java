@@ -2,21 +2,33 @@ package com.agritech.agritech_app.config;
 
 import java.util.ArrayList;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.agritech.agritech_app.service.PasswordEncoderService;
+import com.agritech.agritech_app.util.JwtFilter;
 
 @Configuration
 public class SecurityConfig {
+	@Autowired
+	private JwtFilter jwtFilter;
+
+	@Bean
+	public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
+		return config.getAuthenticationManager();
+	}
+	
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		System.out.println("Hi");
@@ -26,7 +38,9 @@ public class SecurityConfig {
 						"/assets/vendor/fonts/**","/assets/vendor/fonts/boxicons/**",
 						"/assets/vendor/js/**",
 						"/assets/vendor/libs/**",
-						"/assets/vendor/libs/apex-charts/**", "/assets/vendor/libs/highlight/**", "/assets/vendor/libs/jquery/**", "/assets/vendor/libs/masonry/**","/assets/vendor/libs/perfect-scrollbar/**","/assets/vendor/libs/popper/**",
+						"/assets/vendor/libs/apex-charts/**", "/assets/vend"
+								+ ""
+								+ "or/libs/highlight/**", "/assets/vendor/libs/jquery/**", "/assets/vendor/libs/masonry/**","/assets/vendor/libs/perfect-scrollbar/**","/assets/vendor/libs/popper/**",
 						"/dist/css/**", "/dist/libs/**", "/dist/js/**", "/dist/fonts/**",
 						"/libs/apex-charts/**", "/libs/highlight/**", "/libs/jquery/**", "/libs/masonry/**","/libs/perfect-scrollbar/**","/libs/popper/**",
 						"/scss/_bootstrap-extended/**","/scss/_bootstrap-extended/forms/**","/scss/_bootstrap-extended/mixins/**",
@@ -37,20 +51,21 @@ public class SecurityConfig {
 						"/tasks/**",
 						"/fonts/**", "/dist/**", "/css/**", "/js/**", "/static/**",
 						"/index.html", "/html/**","/api/authentication/register","/login", "/auth/**","/auth/login")
-				.permitAll().anyRequest().authenticated().and()
-	            .httpBasic();
-		return http.build();
+				.permitAll().anyRequest().authenticated().and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+		        http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+		        return http.build();
 	}
 	
 	
-	@Bean
-    public AuthenticationManager authenticationManager(HttpSecurity http, PasswordEncoder passwordEncoder) throws Exception {
-        return http.getSharedObject(AuthenticationManagerBuilder.class)
-                   .userDetailsService(username -> new org.springframework.security.core.userdetails.User(
-                           username, passwordEncoder.encode("password"), new ArrayList<>()))
-                   .passwordEncoder(passwordEncoder)
-                   .and().build();
-    }
+	/*
+	 * @Bean public AuthenticationManager authenticationManager(HttpSecurity http,
+	 * PasswordEncoder passwordEncoder) throws Exception { return
+	 * http.getSharedObject(AuthenticationManagerBuilder.class)
+	 * .userDetailsService(username -> new
+	 * org.springframework.security.core.userdetails.User( username,
+	 * passwordEncoder.encode("password"), new ArrayList<>()))
+	 * .passwordEncoder(passwordEncoder) .and().build(); }
+	 */
 
     @Bean
     public PasswordEncoder passwordEncoder() {

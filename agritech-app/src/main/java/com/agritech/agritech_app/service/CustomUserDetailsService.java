@@ -13,13 +13,9 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        // Dummy user for demonstration. Replace this with database logic.
-        if ("user".equals(username)) {
-            return new User(
-                "user",
-                "$2a$10$u7WbHV1yZ6WQ8Y0Tycb4xOkFs8x/n6/HMbAvQKOPMfU9LFOsRmcJS", // "password" (BCrypt hashed)
-                Collections.emptyList() // No roles
-            );
+        // Replace this with your actual user fetching logic
+        if ("mukundpokale8001@gmail.com".equals("mukundpokale8001@gmail.com")) {
+            return new User("mukundpokale8001@gmail.com", "$2a$10$srAunfr2xZh5dWhI9upFNOIzgqxIzVvUH1ZbBZwHg5UeNiDNsXE5q", Collections.emptyList());
         }
         throw new UsernameNotFoundException("User not found");
     }
