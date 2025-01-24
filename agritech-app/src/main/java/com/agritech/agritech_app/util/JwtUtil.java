@@ -11,7 +11,8 @@ public class JwtUtil {
     private final String SECRET_KEY = "/05HV5ChmIRp3jrTlm1dCd0bJbbqW1a0+liTrMEQ67A=";
     private final long EXPIRATION_TIME = 1000 * 60 * 60 * 10;
 
-    public String generateToken(String username) {
+    @SuppressWarnings("deprecation")
+	public String generateToken(String username) {
         return Jwts.builder()
                 .setSubject(username)
                 .setIssuedAt(new Date())
@@ -20,7 +21,8 @@ public class JwtUtil {
                 .compact();
     }
 
-    public String extractUsername(String token) {
+    @SuppressWarnings("deprecation")
+	public String extractUsername(String token) {
         return Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody().getSubject();
     }
 
@@ -28,7 +30,8 @@ public class JwtUtil {
         return username.equals(extractUsername(token)) && !isTokenExpired(token);
     }
 
-    private boolean isTokenExpired(String token) {
+    @SuppressWarnings("deprecation")
+	private boolean isTokenExpired(String token) {
         return Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody().getExpiration().before(new Date());
     }
 }

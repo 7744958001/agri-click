@@ -17,28 +17,23 @@ import com.agritech.agritech_app.util.ValidationUtil;
 @Validated
 public class UserAuthentication {
 
-    private final UserService userService;
+	private final UserService userService;
 
-    public UserAuthentication(UserService userService) {
-        this.userService = userService;
-    }
-    
-    @PostMapping("/register")
-    public ResponseEntity<String> registerUser(@Validated @RequestBody UserRegistrationRequest request) {
-        // Validate email format
-        if (!ValidationUtil.isValidEmail(request.getUsername())) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body("Invalid email format");
-        }
+	public UserAuthentication(UserService userService) {
+		this.userService = userService;
+	}
 
-        // Register the user
-        boolean isRegistered = userService.registerUser(request);
-        if (isRegistered) {
-            return ResponseEntity.status(HttpStatus.CREATED)
-                    .body("User registered successfully");
-        } else {
-            return ResponseEntity.status(HttpStatus.CONFLICT)
-                    .body("User already exists with the given email");
-        }
-    }
+	@PostMapping("/register")
+	public ResponseEntity<String> registerUser(@Validated @RequestBody UserRegistrationRequest request) {
+		if (!ValidationUtil.isValidEmail(request.getUsername())) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid email format");
+		}
+
+		boolean isRegistered = userService.registerUser(request);
+		if (isRegistered) {
+			return ResponseEntity.status(HttpStatus.CREATED).body("User registered successfully");
+		} else {
+			return ResponseEntity.status(HttpStatus.CONFLICT).body("User already exists with the given email");
+		}
+	}
 }

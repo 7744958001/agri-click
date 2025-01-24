@@ -13,18 +13,16 @@ import com.agritech.agritech_app.util.JwtUtil;
 @RequestMapping("/auth")
 public class AuthController {
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
+	@Autowired
+	private AuthenticationManager authenticationManager;
 
-    @Autowired
-    private JwtUtil jwtUtil;
+	@Autowired
+	private JwtUtil jwtUtil;
 
-    @PostMapping("/login")
-    public String login(@RequestBody AuthRequest request) {
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword())
-        );
-        return jwtUtil.generateToken(authentication.getName());
-    }
+	@PostMapping("/login")
+	public String login(@RequestBody AuthRequest request) {
+		Authentication authentication = authenticationManager
+				.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
+		return jwtUtil.generateToken(authentication.getName());
+	}
 }
-
