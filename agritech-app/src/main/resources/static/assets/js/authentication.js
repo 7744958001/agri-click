@@ -1,4 +1,11 @@
-$(document).ready(function () {
+ $(document).ready(function () {
+    const token = localStorage.getItem("token");
+    
+    if (!token) {
+       // window.location.href = "/html/auth-register.html"; // Redirect to login if no token found
+    }
+
+	 
       $("#create-account-submit-button").click(function () {
         let isValid = true;
 
@@ -87,6 +94,7 @@ $(document).ready(function () {
                 console.log("JWT Token:", token);
                 localStorage.setItem("jwtToken", token);
                 alert("Login successful! Token stored.");
+                window.location.href = "index.html";
             },
             error: function (error) {
               alert('Login failed. Please try again.');

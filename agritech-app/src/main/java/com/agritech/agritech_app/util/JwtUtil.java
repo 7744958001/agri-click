@@ -8,7 +8,7 @@ import java.util.Date;
 @Component
 public class JwtUtil {
 
-    private final String SECRET_KEY = "/05HV5ChmIRp3jrTlm1dCd0bJbbqW1a0+liTrMEQ67A=";
+    private final String SECRET_KEY = "/05HV5ChmIRp3jrTlm1dCd0bJbbqW1a0+liTrMEQ67A=nm";
     private final long EXPIRATION_TIME = 1000 * 60 * 60 * 10;
 
     @SuppressWarnings("deprecation")

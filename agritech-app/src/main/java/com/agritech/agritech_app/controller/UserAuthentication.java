@@ -28,7 +28,7 @@ public class UserAuthentication {
 		if (!ValidationUtil.isValidEmail(request.getUsername())) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid email format");
 		}
-
+		
 		boolean isRegistered = userService.registerUser(request);
 		if (isRegistered) {
 			return ResponseEntity.status(HttpStatus.CREATED).body("User registered successfully");

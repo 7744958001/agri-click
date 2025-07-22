@@ -39,12 +39,12 @@ public class SecurityConfig {
 	@SuppressWarnings("removal")
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-		System.out.println("Hi");
+		System.out.println("HI");
 		http.csrf().disable().authorizeHttpRequests()
 				.requestMatchers("/public/**", "/assets/css/**", "/assets/img/**", "/assets/js/**",
 						"/assets/vendor/css/**", "/assets/vendor/css/pages/**", "/assets/vendor/fonts/**",
 						"/assets/vendor/fonts/boxicons/**", "/assets/vendor/js/**", "/assets/vendor/libs/**",
-						"/assets/vendor/libs/apex-charts/**", "/assets/vend" + "or/libs/highlight/**",
+						"/assets/vendor/libs/apex-charts/**", "/assets/vend" + "" + "or/libs/highlight/**",
 						"/assets/vendor/libs/jquery/**", "/assets/vendor/libs/masonry/**",
 						"/assets/vendor/libs/perfect-scrollbar/**", "/assets/vendor/libs/popper/**", "/dist/css/**",
 						"/dist/libs/**", "/dist/js/**", "/dist/fonts/**", "/libs/apex-charts/**", "/libs/highlight/**",
@@ -53,7 +53,7 @@ public class SecurityConfig {
 						"/scss/_bootstrap-extended/mixins/**", "/scss/_components/**", "/scss/_components/mixins/**",
 						"/scss/_custom-variables/**", "/scss/_theme/**", "/scss/pages/**", "/tasks/**", "/fonts/**",
 						"/dist/**", "/css/**", "/js/**", "/static/**", "/index.html", "/html/**",
-						"/api/authentication/register", "/login", "/auth/**", "/auth/login")
+						"/api/authentication/register", "/login", "/auth/**", "/auth/login", "/html/auth-login.html")
 				.permitAll().anyRequest().authenticated().and().sessionManagement()
 				.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 		http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);

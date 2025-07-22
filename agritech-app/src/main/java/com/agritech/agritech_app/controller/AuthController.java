@@ -25,4 +25,10 @@ public class AuthController {
 				.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
 		return jwtUtil.generateToken(authentication.getName());
 	}
+	
+	@GetMapping("/login")
+	public String login1(@RequestBody AuthRequest request) {
+		System.out.println("login");
+        return "auth-login.html";
+    }
 }
