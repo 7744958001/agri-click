@@ -23,6 +23,7 @@ public class AuthController {
 	public String login(@RequestBody AuthRequest request) {
 		Authentication authentication = authenticationManager
 				.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
+		
 		return jwtUtil.generateToken(authentication.getName());
 	}
 	

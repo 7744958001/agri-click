@@ -52,7 +52,7 @@ public class SecurityConfig {
 						"/scss/_bootstrap-extended/**", "/scss/_bootstrap-extended/forms/**",
 						"/scss/_bootstrap-extended/mixins/**", "/scss/_components/**", "/scss/_components/mixins/**",
 						"/scss/_custom-variables/**", "/scss/_theme/**", "/scss/pages/**", "/tasks/**", "/fonts/**",
-						"/dist/**", "/css/**", "/js/**", "/static/**", "/index.html", "/html/**",
+						"/dist/**", "/css/**", "/js/**", "/static/**", "/html/**",
 						"/api/authentication/register", "/login", "/auth/**", "/auth/login", "/html/auth-login.html")
 				.permitAll().anyRequest().authenticated().and().sessionManagement()
 				.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
