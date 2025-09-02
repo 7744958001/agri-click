@@ -3,6 +3,33 @@
  */
 
 'use strict';
+$(document).ready(function() {
+	getUserDetails();
+});
+
+var getUserDetails = function() {
+	const jwtToken = localStorage.getItem("jwtToken");
+	$.ajax({
+		url: "/api/authentication/getUserDetails",
+		type: "GET",
+		headers: {
+			"Authorization": "Bearer " + jwtToken
+		},
+		success: function(response) {
+			$('#firstName').val(response.firstName);
+			$('#lastName').val(response.lastName);
+			$('#email').val(response.username);
+			$('#password').val(response.password);
+			$('#phoneNumber').val(response.phoneNumber);
+			$('#uploadedAvatar').attr('src', response.userfilePath);
+			alert("User details fetched!");
+			console.log(response);
+		},
+		error: function(xhr) {
+			alert("Failed to get user details: " + xhr.responseText);
+		},
+	});
+}
 
 document.addEventListener('DOMContentLoaded', function (e) {
   (function () {
@@ -27,3 +54,27 @@ document.addEventListener('DOMContentLoaded', function (e) {
     }
   })();
 });
+
+var saveUserDetails = function() {
+	const jwtToken = localStorage.getItem("jwtToken");
+	$.ajax({
+		url: "/api/authentication/updateUserDetails",
+		type: "GET",
+		headers: {
+			"Authorization": "Bearer " + jwtToken
+		},
+		success: function(response) {
+			$('#firstName').val(response.firstName);
+			$('#lastName').val(response.lastName);
+			$('#email').val(response.username);
+			$('#password').val(response.password);
+			$('#phoneNumber').val(response.phoneNumber);
+			$('#uploadedAvatar').attr('src', response.userfilePath);
+			alert("User details fetched!");
+			console.log(response);
+		},
+		error: function(xhr) {
+			alert("Failed to get user details: " + xhr.responseText);
+		},
+	});
+}
