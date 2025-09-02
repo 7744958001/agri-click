@@ -27,7 +27,19 @@ public class User {
 
 	@ElementCollection(fetch = FetchType.EAGER)
 	private Set<String> userRole;
+	
+	@Column(nullable = true, name="first_name")
+	private String firstName;
 
+	@Column(nullable = true, name = "last_name")
+	private String lastName;
+	
+	@Column(nullable = true, name = "phone_number")
+	private Integer phoneNumber;
+	
+	@Column(nullable = true, name = "user_photo_path")
+	private String userfilePath;
+	
 	public Set<String> getUserRole() {
 		return userRole;
 	}
@@ -59,4 +71,38 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public Integer getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(Integer phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
+	public String getUserfilePath() {
+		return userfilePath;
+	}
+
+	public void setUserfilePath(String userfilePath) {
+		this.userfilePath = userfilePath;
+	}
+	
+	
 }
