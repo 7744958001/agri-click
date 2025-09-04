@@ -10,6 +10,9 @@ public class AgritechAppApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(AgritechAppApplication.class, args);
 		
+		
+		
+		
 	}
 }
 
