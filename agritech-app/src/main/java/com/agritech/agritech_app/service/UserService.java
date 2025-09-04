@@ -28,4 +28,27 @@ public class UserService {
 		userRepository.save(user);
 		return true;
 	}
+
+	public boolean updateUserDetails(User request) {
+	     Optional<User> existingUser = userRepository.findByUsername(request.getUsername());
+		if(existingUser.isPresent()) {
+			User user = existingUser.get();
+			user.setFirstName(request.getFirstName());
+			user.setLastName(request.getLastName());
+			user.setPhoneNumber(request.getPhoneNumber());
+			user.setPassword(passwordEncoder.encode(request.getPassword()));
+			
+			userRepository.save(user);
+		}
+		 return true;
+	}
+
+	public User getUserDetails(String username) {
+		 Optional<User> user = userRepository.findByUsername(username);
+		 if(!user.isEmpty()) {
+			 return user.get();
+		 } else {
+			 return null;
+		 }
+	}
 }
